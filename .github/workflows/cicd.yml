@@ -49,9 +49,8 @@ jobs:
       - name: Build Docker Image
         run: |
           IMAGE_TAG=${{ env.ENV_NAME }}-${{ github.run_number }}
-          docker build -t ${{ vars.ACR_NAME }}.azurecr.io/myapp:$IMAGE_TAG .
-
-                
+          docker build -t myapp:$IMAGE_TAG .
+          
       - name: Check ACR Name
         run: |
          echo "ACR Name: ${{ vars.ACR_NAME }}"
@@ -64,8 +63,8 @@ jobs:
       - name: Tag and Push Docker Image to ACR
         run: |
           IMAGE_TAG=${{ env.ENV_NAME }}-${{ github.run_number }}
-          docker tag myapp:$IMAGE_TAG ${{ vars.ACR_NAME }}.azurecr.io/myapp:$IMAGE_TAG
-          docker push ${{ vars.ACR_NAME }}.azurecr.io/myapp:$IMAGE_TAG
+          docker tag myapp:$IMAGE_TAG kiranacrdevops.azurecr.io/myapp:$IMAGE_TAG
+          docker push kiranacrdevops.azurecr.io/myapp:$IMAGE_TAG
            
   deploy:
     runs-on: ubuntu-latest
