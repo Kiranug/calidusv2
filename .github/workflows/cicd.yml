@@ -44,8 +44,8 @@ jobs:
 
       - name: Tag and Push Docker Image to ACR
         run: |
-          docker tag myapp:${{ github.sha }} ${{ secrets.ACR_NAME }}.azurecr.io/myapp:${{ github.sha }}
-          docker push ${{ secrets.ACR_NAME }}.azurecr.io/myapp:${{ github.sha }}
+          docker tag myapp:${{ github.sha }} ${{ secrets.DEV.ACR_NAME }}.azurecr.io/myapp:${{ github.sha }}
+          docker push ${{ secrets.DEV.ACR_NAME }}.azurecr.io/myapp:${{ github.sha }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -61,14 +61,14 @@ jobs:
       - name: Deploy to AKS (Dev)
         if: github.ref == 'refs/heads/dev'
         run: |
-          helm upgrade --install myapp ./helm/myapp --namespace ${{ secrets.NAMESPACE }} --values ./k8s/dev-values.yaml
+          helm upgrade --install myapp ./helm/myapp --namespace ${{ secrets.DEV.NAMESPACE }} --values ./k8s/dev-values.yaml
 
       - name: Deploy to AKS (Staging)
         if: github.ref == 'refs/heads/staging'
         run: |
-          helm upgrade --install myapp ./helm/myapp --namespace ${{ secrets.NAMESPACE }} --values ./k8s/staging-values.yaml
+          helm upgrade --install myapp ./helm/myapp --namespace ${{ secrets.DEV.NAMESPACE }} --values ./k8s/staging-values.yaml
 
       - name: Deploy to AKS (Prod)
         if: github.ref == 'refs/heads/prod'
         run: |
-          helm upgrade --install myapp ./helm/myapp --namespace ${{ secrets.NAMESPACE }} --values ./k8s/prod-values.yaml
+          helm upgrade --install myapp ./helm/myapp --namespace ${{ secrets.DEV.NAMESPACE }} --values ./k8s/prod-values.yaml
