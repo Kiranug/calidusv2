@@ -1,4 +1,4 @@
-name: CI/CD Pipeline to app on AKS 
+name: CI/CD Pipeline to app on AKS
 
 on:
   push:
@@ -36,7 +36,6 @@ jobs:
             echo "ENV_NAME=dev" >> $GITHUB_ENV
           fi
           echo "IMAGE_TAG=${{ env.ENV_NAME }}-${{ github.run_number }}" >> $GITHUB_ENV
-        shell: bash
 
       - name: Login to Azure
         uses: azure/login@v1
@@ -49,7 +48,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t myapp:${{ env.IMAGE_TAG }} .
+          docker build -t myapp:$IMAGE_TAG .
 
       - name: Check ACR Name
         run: echo "ACR Name: ${{ vars.ACR_NAME }}"
@@ -61,8 +60,8 @@ jobs:
 
       - name: Tag and Push Docker Image to ACR
         run: |
-          docker tag myapp:${{ env.IMAGE_TAG }} ${{ vars.ACR_NAME }}.azurecr.io/myapp:${{ env.IMAGE_TAG }}
-          docker push ${{ vars.ACR_NAME }}.azurecr.io/myapp:${{ env.IMAGE_TAG }}
+          docker tag myapp:$IMAGE_TAG ${{ vars.ACR_NAME }}.azurecr.io/myapp:$IMAGE_TAG
+          docker push ${{ vars.ACR_NAME }}.azurecr.io/myapp:$IMAGE_TAG
 
   deploy:
     runs-on: ubuntu-latest
@@ -83,5 +82,5 @@ jobs:
           helm upgrade --install myapp ./helm/myapp \
             --namespace ${{ vars.NAMESPACE }} \
             --set image.repository=${{ vars.ACR_NAME }}.azurecr.io/myapp \
-            --set image.tag=${{ env.IMAGE_TAG }} \
+            --set image.tag=$IMAGE_TAG \
             --values ./k8s/${{ env.ENV_NAME }}-values.yaml
