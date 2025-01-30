@@ -85,5 +85,5 @@ jobs:
           helm upgrade --install myapp ./helm/myapp \
             --namespace ${{ vars.NAMESPACE }} \
             --set image.repository=${{ vars.ACR_NAME }}.azurecr.io/myapp \
-            --set image.tag=$IMAGE_TAG \
+            --set image.tag=${{ github.run_number }} \
             --values ./k8s/${{ env.ENV_NAME }}-values.yaml
