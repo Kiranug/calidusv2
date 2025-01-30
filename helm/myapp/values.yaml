@@ -1,9 +1,8 @@
-replicaCount: 1
-image:
-  repository: myapp
-  pullPolicy: IfNotPresent
-  tag: "latest"
+replicaCount: 2
 
-service:
-  type: ClusterIP
-  port: 80
+image:
+  repository: kiranacrdevops.azurecr.io/myapp
+  tag: "{{ .Values.image.tag }}"
+
+environment: "prod"
+namespace: dev
