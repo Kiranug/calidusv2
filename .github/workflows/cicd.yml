@@ -40,7 +40,7 @@ jobs:
 
       - name: Log in to Azure Container Registry
         run: |
-          az acr login --name ${{ secrets.ACR_NAME }}
+          az acr login --name ${{ secrets.DEV.ACR_NAME }}
 
       - name: Tag and Push Docker Image to ACR
         run: |
