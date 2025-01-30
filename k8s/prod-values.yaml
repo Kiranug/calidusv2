@@ -1,0 +1,5 @@
+namespace: prod
+replicas: 4
+image:
+  repository: myacr.azurecr.io/myapp
+  tag: latest

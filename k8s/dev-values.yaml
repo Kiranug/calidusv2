@@ -1,0 +1,5 @@
+namespace: dev
+replicas: 2
+image:
+  repository: myacr.azurecr.io/myapp
+  tag: latest
