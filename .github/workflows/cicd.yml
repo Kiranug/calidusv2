@@ -75,7 +75,8 @@ jobs:
         uses: azure/setup-helm@v1
 
       - name: Set Image Tag for Deployment
-        run: echo "IMAGE_TAG=${{ env.ENV_NAME }}-${{ github.run_number }}" >> $GITHUB_ENV
+        run: |
+          echo "IMAGE_TAG=${{ env.ENV_NAME }}-${{ github.run_number }}" >> $GITHUB_ENV
 
       - name: Deploy to AKS
         run: |
