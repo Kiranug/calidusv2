@@ -50,7 +50,7 @@ jobs:
       - name: Tag and Push Docker Image to ACR
         run: |
           docker tag myapp:${{ github.sha }} ${{ vars.ACR_NAME }}.azurecr.io/myapp:${{ github.sha }}
-          docker push ${{ vars.ACR_NAME }}/myapp:${{ github.sha }}
+          docker push ${{ vars.ACR_NAME }}.azurecr.io/myapp:${{ github.sha }}
          
   deploy:
     runs-on: ubuntu-latest
