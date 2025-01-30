@@ -50,6 +50,7 @@ jobs:
       - name: Set Kubernetes Context
         run: |
           az aks get-credentials --resource-group ${{ vars.RESOURCE_GROUP }} --name ${{ vars.AKS_CLUSTER_NAME }}
+          kubectl config current-context
 
 
       - name: Build Docker Image
