@@ -35,8 +35,8 @@ jobs:
           else
             echo "ENV_NAME=dev" >> $GITHUB_ENV
           fi
-           echo "IMAGE_TAG=${{ env.ENV_NAME }}-${{ github.run_number }}" >> $GITHUB_ENV
-           echo "Final IMAGE_TAG: ${{ env.IMAGE_TAG }}"
+          echo "IMAGE_TAG=${{ env.ENV_NAME }}-${{ github.run_number }}" >> $GITHUB_ENV
+          echo "Final IMAGE_TAG: ${{ env.IMAGE_TAG }}"
 
       - name: Login to Azure
         uses: azure/login@v1
