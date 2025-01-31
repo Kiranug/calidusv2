@@ -1,4 +1,4 @@
-name: CI/CD Pipeline to app on AKS   
+name: CI/CD Pipeline to app on AKS    
 
 on:
   push:
