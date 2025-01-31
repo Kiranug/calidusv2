@@ -49,7 +49,7 @@ jobs:
 
       - name: Set Kubernetes Context
         run: |
-          az aks get-credentials --resource-group ${{ vars.RESOURCE_GROUP }} --name ${{ vars.AKS_CLUSTER_NAME }}
+          az aks get-credentials --resource-group ${{ vars.RESOURCE_GROUP }} --name ${{ vars.AKS_CLUSTER_NAME }} --overwrite-existing
           kubectl config current-context
 
 
